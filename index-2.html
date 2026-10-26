@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171717">
+<meta name="description" content="매일 연습하는 나만의 독일어 단어장">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Deutsch Lernen · 독일어 단어장</title>
+<style>
+:root{--black:#171717;--red:#d9272e;--gold:#f5c542;--paper:#f7f5ef;--ink:#202020;--muted:#6b6b6b;--line:#e2dfd7;--green:#245c43}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif}
+header{background:linear-gradient(135deg,#171717 0 33.3%,#d9272e 33.3% 66.6%,#f5c542 66.6%);padding:5px 0 0}
+.headinner{background:#171717;color:white;padding:20px 18px 18px}
+.brand{display:flex;align-items:center;gap:12px}.flag{width:38px;height:26px;border-radius:4px;overflow:hidden;box-shadow:0 0 0 1px #ffffff22}.flag i{display:block;height:33.333%}.flag i:nth-child(1){background:#171717}.flag i:nth-child(2){background:#d9272e}.flag i:nth-child(3){background:#f5c542}
+h1{font-size:20px;margin:0;letter-spacing:-.4px}.sub{color:#c9c9c9;font-size:12px;margin-top:3px}
+main{max-width:760px;margin:auto;padding:16px 14px 40px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:13px}.stat .n{font-size:22px;font-weight:800}.stat .l{font-size:11px;color:var(--muted);margin-top:3px}
+.goalrow{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:13px;margin-bottom:8px}.progress{height:8px;border-radius:20px;background:#eeeae2;overflow:hidden}.progress span{height:100%;display:block;width:0;background:linear-gradient(90deg,var(--red),var(--gold));transition:width .2s}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:15px 0}.tab{border:1px solid var(--line);border-radius:11px;background:white;padding:11px 4px;font-weight:700;font-size:12px;color:#555}.tab.active{background:var(--black);color:white;border-color:var(--black)}
+h2{font-size:17px;margin:0 0 12px}.muted{color:var(--muted);font-size:12px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+select,input,button{font:inherit}select,input[type=number],input[type=text]{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--ink);max-width:100%}
+button{cursor:pointer;border:0;border-radius:11px;padding:11px 14px;font-weight:750}.primary{background:var(--red);color:white}.dark{background:var(--black);color:white}.light{background:#f0eee8;color:#333}.gold{background:var(--gold);color:#171717}.small{padding:8px 10px;font-size:12px}
+.view{display:none}.view.active{display:block}.flash{min-height:275px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:white;border:1px solid var(--line);border-radius:20px;padding:24px;margin:12px 0;box-shadow:0 8px 24px #18181808;cursor:pointer}.word{font-size:clamp(27px,7vw,40px);font-weight:850;letter-spacing:-.7px;overflow-wrap:anywhere}.meaning{font-size:24px;font-weight:750;margin-top:12px}.pron{font-size:14px;color:var(--muted);margin-top:9px}.pill{display:inline-block;font-size:11px;border-radius:99px;padding:5px 9px;background:#f1eee7;color:#555;margin-bottom:18px}.flashactions{display:flex;gap:8px}.flashactions button{flex:1}
+label{font-size:12px;color:var(--muted)}.field{display:flex;flex-direction:column;gap:5px}.quizquestion{font-size:24px;font-weight:850;margin:24px 0 16px;overflow-wrap:anywhere}.answer{width:100%;margin-top:8px;text-align:left;background:white;border:1px solid var(--line);padding:13px}.answer.correct{background:#e2f3e7;border-color:#66a47a}.answer.wrong{background:#ffebeb;border-color:#d9272e}.feedback{font-weight:700;margin-top:12px;min-height:22px}.list{display:flex;flex-direction:column;gap:8px;margin-top:12px}.item{background:white;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}.item strong{display:block}.item small{color:var(--muted)}.empty{padding:24px;text-align:center;color:var(--muted);background:white;border-radius:14px;border:1px dashed var(--line)}
+.catcount{font-size:12px;color:var(--muted);margin:8px 0 12px}.settings{display:grid;grid-template-columns:1fr 1fr;gap:12px}.settings .field{background:#fff;padding:12px;border:1px solid var(--line);border-radius:12px}
+footer{text-align:center;font-size:11px;color:#888;margin-top:24px;line-height:1.7}
+@media(min-width:620px){main{padding-top:22px}.flash{min-height:320px}.word{font-size:42px}}
+</style>
+</head>
+<body>
+<header><div class="headinner">
+  <div class="brand"><div class="flag"><i></i><i></i><i></i></div><div><h1>Deutsch Lernen</h1><div class="sub">나만의 독일어 단어장 · 135 Wörter</div></div></div>
+</div></header>
+<main>
+  <div class="stats">
+    <div class="stat"><div class="n" id="learnedStat">0</div><div class="l">알고 있는 단어</div></div>
+    <div class="stat"><div class="n" id="wrongStat">0</div><div class="l">오답 단어</div></div>
+    <div class="stat"><div class="n" id="streakStat">0</div><div class="l">오늘 학습 수</div></div>
+  </div>
+  <section class="panel">
+    <div class="goalrow"><strong>오늘의 목표</strong><span id="goalLabel">0 / 20개</span></div>
+    <div class="progress"><span id="goalBar"></span></div>
+    <div class="row" style="margin-top:11px"><span class="muted">목표 단어 수</span><input id="goalInput" type="number" min="1" max="135" value="20" style="width:78px"><button class="dark small" id="saveGoal">목표 저장</button><span class="muted" id="goalMessage"></span></div>
+  </section>
+  <nav>
+    <button class="tab active" data-view="cards">카드 암기</button>
+    <button class="tab" data-view="quiz">단어 시험</button>
+    <button class="tab" data-view="mistakes">오답 노트</button>
+    <button class="tab" data-view="vocab">단어 목록</button>
+  </nav>
+  <section class="view active" id="cards">
+    <div class="between"><h2>플래시카드</h2><span class="muted" id="cardCount">1 / 135</span></div>
+    <div class="row">
+      <div class="field"><label for="catFilter">품사</label><select id="catFilter"><option value="전체">전체</option><option>명사</option><option>동사</option><option>형용사</option><option>부사</option><option>전치사·접속사</option><option>기타</option></select></div>
+      <div class="field"><label for="direction">카드 방향</label><select id="direction"><option value="de">독일어 → 뜻</option><option value="ko">뜻 → 독일어</option></select></div>
+    </div>
+    <div class="flash" id="flashcard" role="button" tabindex="0" aria-label="카드 뒤집기">
+      <span class="pill" id="cardCat">명사</span><div class="word" id="cardFront">der Mann</div><div class="meaning" id="cardBack" hidden>남자</div><div class="pron" id="cardPron" hidden>발음: 데어 만</div><div class="muted" id="tapHint" style="margin-top:20px">카드를 눌러 정답 확인</div>
+    </div>
+    <div class="flashactions"><button class="light" id="prevCard">← 이전</button><button class="light" id="flipCard">정답 보기</button><button class="dark" id="nextCard">다음 →</button></div>
+    <div class="row" style="margin-top:10px"><button class="primary" id="markKnown" style="flex:1">✓ 알고 있어요</button><button class="light" id="markWrong" style="flex:1">× 다시 보기</button><button class="gold" id="shuffleCards">섞기</button></div>
+  </section>
+  <section class="view" id="quiz">
+    <div class="between"><h2>단어 시험</h2><span class="muted" id="quizProgress">준비 완료</span></div>
+    <div class="row">
+      <div class="field"><label for="quizType">시험 방식</label><select id="quizType"><option value="mix">혼합 시험</option><option value="deko">독일어 → 한국어</option><option value="kode">한국어 → 독일어</option><option value="article">관사 시험</option></select></div>
+      <div class="field"><label for="quizSize">문제 수</label><select id="quizSize"><option>10</option><option>20</option><option>30</option><option>50</option><option>135</option></select></div>
+      <button class="primary" id="startQuiz" style="align-self:end">시험 시작</button>
+    </div>
+    <div id="quizArea" class="panel" style="margin-top:14px">
+      <div class="muted">시험 시작을 누르면 문제가 나와.</div>
+      <div class="quizquestion">준비됐어?</div>
+      <div class="muted">정답을 고르면 점수와 오답이 자동 저장돼.</div>
+    </div>
+  </section>
+  <section class="view" id="mistakes">
+    <div class="between"><h2>오답 노트</h2><button class="light small" id="clearMistakes">오답 비우기</button></div>
+    <p class="muted">카드에서 ×를 누르거나 시험에서 틀린 단어가 여기에 쌓여.</p>
+    <div id="mistakeList" class="list"></div>
+  </section>
+  <section class="view" id="vocab">
+    <div class="between"><h2>전체 단어</h2><span class="muted" id="vocabCount">135개</span></div>
+    <input id="searchWord" type="text" placeholder="독일어 또는 한국어 검색" style="width:100%;margin-bottom:10px">
+    <div class="row"><select id="vocabCat"><option value="전체">전체 품사</option><option>명사</option><option>동사</option><option>형용사</option><option>부사</option><option>전치사·접속사</option><option>기타</option></select><button class="light small" id="exportData">학습 기록 내보내기</button></div>
+    <div id="vocabList" class="list"></div>
+  </section>
+  <section class="panel" style="margin-top:16px">
+    <div class="between"><div><strong>학습 데이터</strong><div class="muted">이 기기의 브라우저에 자동 저장돼.</div></div><button class="light small" id="resetAll">초기화</button></div>
+    <p class="muted" style="margin-bottom:0">기록은 이 기기와 브라우저에 저장돼. 브라우저 데이터를 지우거나 다른 기기를 사용하면 기록이 사라질 수 있어. 가끔 내보내기로 백업해 줘.</p>
+  </section>
+  <footer>Deutsch Lernen · 독일어 발음의 한글 표기는 대략적인 참고용이야.<br>단어 135개 · 오프라인 사용은 사이트를 설치한 환경과 브라우저 지원에 따라 달라질 수 있어.</footer>
+</main>
+<script>
+const WORDS = [{"cat": "명사", "de": "der Mann", "ko": "남자", "pron": "데어 만"}, {"cat": "명사", "de": "die Frau", "ko": "여자", "pron": "디 프라우"}, {"cat": "명사", "de": "das Kind", "ko": "아이", "pron": "다스 킨트"}, {"cat": "명사", "de": "der Mensch", "ko": "인간", "pron": "데어 멘쉬"}, {"cat": "명사", "de": "die Familie", "ko": "가족", "pron": "디 파밀리에"}, {"cat": "명사", "de": "der Freund", "ko": "남성 친구", "pron": "데어 프로인트"}, {"cat": "명사", "de": "die Schule", "ko": "학교", "pron": "디 슐레"}, {"cat": "명사", "de": "der Lehrer", "ko": "남성 선생님", "pron": "데어 레러"}, {"cat": "명사", "de": "die Lehrerin", "ko": "여성 선생님", "pron": "디 레러린"}, {"cat": "명사", "de": "das Buch", "ko": "책", "pron": "다스 부흐"}, {"cat": "명사", "de": "der Tisch", "ko": "탁자", "pron": "데어 티쉬"}, {"cat": "명사", "de": "der Stuhl", "ko": "의자", "pron": "데어 슈툴"}, {"cat": "명사", "de": "das Haus", "ko": "집", "pron": "다스 하우스"}, {"cat": "명사", "de": "die Tür", "ko": "문", "pron": "디 튀어"}, {"cat": "명사", "de": "das Fenster", "ko": "창문", "pron": "다스 펜스터"}, {"cat": "명사", "de": "das Wasser", "ko": "물", "pron": "다스 바서"}, {"cat": "명사", "de": "das Brot", "ko": "빵", "pron": "다스 브로트"}, {"cat": "명사", "de": "der Apfel", "ko": "사과", "pron": "데어 압펠"}, {"cat": "명사", "de": "die Milch", "ko": "우유", "pron": "디 밀히"}, {"cat": "명사", "de": "die Cola", "ko": "콜라", "pron": "디 콜라"}, {"cat": "명사", "de": "der Kaffee", "ko": "커피", "pron": "데어 카페"}, {"cat": "명사", "de": "der Tee", "ko": "차", "pron": "데어 테"}, {"cat": "명사", "de": "das Essen", "ko": "음식, 식사", "pron": "다스 에슨"}, {"cat": "명사", "de": "die Stadt", "ko": "도시", "pron": "디 슈타트"}, {"cat": "명사", "de": "das Land", "ko": "나라, 땅", "pron": "다스 란트"}, {"cat": "명사", "de": "die Welt", "ko": "세계", "pron": "디 벨트"}, {"cat": "명사", "de": "die Landkarte", "ko": "지도", "pron": "디 란트카르테"}, {"cat": "명사", "de": "die Karte", "ko": "지도, 카드", "pron": "디 카르테"}, {"cat": "명사", "de": "die Sprache", "ko": "언어", "pron": "디 슈프라헤"}, {"cat": "명사", "de": "das Wort", "ko": "단어", "pron": "다스 보어트"}, {"cat": "명사", "de": "der Name", "ko": "이름", "pron": "데어 나메"}, {"cat": "명사", "de": "die Zeit", "ko": "시간", "pron": "디 차이트"}, {"cat": "명사", "de": "der Tag", "ko": "날, 하루", "pron": "데어 타크"}, {"cat": "명사", "de": "die Nacht", "ko": "밤", "pron": "디 나흐트"}, {"cat": "명사", "de": "der Morgen", "ko": "아침", "pron": "데어 모르겐"}, {"cat": "명사", "de": "der Abend", "ko": "저녁", "pron": "데어 아벤트"}, {"cat": "명사", "de": "das Jahr", "ko": "해, 년", "pron": "다스 야어"}, {"cat": "명사", "de": "die Woche", "ko": "주, 일주일", "pron": "디 보헤"}, {"cat": "명사", "de": "das Geld", "ko": "돈", "pron": "다스 겔트"}, {"cat": "명사", "de": "die Arbeit", "ko": "일, 노동", "pron": "디 아르바이트"}, {"cat": "명사", "de": "das Auto", "ko": "자동차", "pron": "다스 아우토"}, {"cat": "명사", "de": "der Zug", "ko": "기차", "pron": "데어 추크"}, {"cat": "명사", "de": "der Bahnhof", "ko": "기차역", "pron": "데어 반호프"}, {"cat": "명사", "de": "die Straße", "ko": "거리, 도로", "pron": "디 슈트라세"}, {"cat": "명사", "de": "die Stadtmitte", "ko": "도심", "pron": "디 슈타트미테"}, {"cat": "명사", "de": "der Hund", "ko": "개", "pron": "데어 훈트"}, {"cat": "명사", "de": "die Katze", "ko": "고양이", "pron": "디 카체"}, {"cat": "명사", "de": "die Musik", "ko": "음악", "pron": "디 무지크"}, {"cat": "명사", "de": "das Lied", "ko": "노래", "pron": "다스 리트"}, {"cat": "명사", "de": "die Geschichte", "ko": "역사, 이야기", "pron": "디 게쉬히테"}, {"cat": "동사", "de": "sein", "ko": "~이다", "pron": "자인"}, {"cat": "동사", "de": "haben", "ko": "가지다", "pron": "하벤"}, {"cat": "동사", "de": "werden", "ko": "~이 되다", "pron": "베어든"}, {"cat": "동사", "de": "gehen", "ko": "가다", "pron": "게엔"}, {"cat": "동사", "de": "kommen", "ko": "오다", "pron": "코멘"}, {"cat": "동사", "de": "machen", "ko": "하다, 만들다", "pron": "마헨"}, {"cat": "동사", "de": "lernen", "ko": "배우다", "pron": "레어넨"}, {"cat": "동사", "de": "sprechen", "ko": "말하다", "pron": "슈프레헨"}, {"cat": "동사", "de": "sagen", "ko": "말하다", "pron": "자겐"}, {"cat": "동사", "de": "hören", "ko": "듣다", "pron": "회렌"}, {"cat": "동사", "de": "sehen", "ko": "보다", "pron": "제엔"}, {"cat": "동사", "de": "essen", "ko": "먹다", "pron": "에슨"}, {"cat": "동사", "de": "trinken", "ko": "마시다", "pron": "트링켄"}, {"cat": "동사", "de": "schlafen", "ko": "자다", "pron": "슐라펜"}, {"cat": "동사", "de": "lesen", "ko": "읽다", "pron": "레젠"}, {"cat": "동사", "de": "schreiben", "ko": "쓰다", "pron": "슈라이벤"}, {"cat": "동사", "de": "spielen", "ko": "놀다, 경기하다", "pron": "슈필렌"}, {"cat": "동사", "de": "arbeiten", "ko": "일하다", "pron": "아르바이텐"}, {"cat": "동사", "de": "wollen", "ko": "원하다", "pron": "볼렌"}, {"cat": "동사", "de": "brauchen", "ko": "필요로 하다", "pron": "브라우헨"}, {"cat": "형용사", "de": "gut", "ko": "좋은", "pron": "구트"}, {"cat": "형용사", "de": "schlecht", "ko": "나쁜", "pron": "슐레히트"}, {"cat": "형용사", "de": "groß", "ko": "큰", "pron": "그로스"}, {"cat": "형용사", "de": "klein", "ko": "작은", "pron": "클라인"}, {"cat": "형용사", "de": "lang", "ko": "긴", "pron": "랑"}, {"cat": "형용사", "de": "kurz", "ko": "짧은", "pron": "쿠르츠"}, {"cat": "형용사", "de": "alt", "ko": "오래된, 나이 든", "pron": "알트"}, {"cat": "형용사", "de": "jung", "ko": "젊은", "pron": "융"}, {"cat": "형용사", "de": "neu", "ko": "새로운", "pron": "노이"}, {"cat": "형용사", "de": "schön", "ko": "아름다운", "pron": "쇤"}, {"cat": "형용사", "de": "schnell", "ko": "빠른", "pron": "슈넬"}, {"cat": "형용사", "de": "langsam", "ko": "느린", "pron": "랑잠"}, {"cat": "형용사", "de": "leicht", "ko": "가벼운, 쉬운", "pron": "라이히트"}, {"cat": "형용사", "de": "schwer", "ko": "무거운, 어려운", "pron": "슈베어"}, {"cat": "형용사", "de": "wichtig", "ko": "중요한", "pron": "비히티히"}, {"cat": "부사", "de": "heute", "ko": "오늘", "pron": "호이테"}, {"cat": "부사", "de": "morgen", "ko": "내일", "pron": "모르겐"}, {"cat": "부사", "de": "gestern", "ko": "어제", "pron": "게스턴"}, {"cat": "부사", "de": "jetzt", "ko": "지금", "pron": "예츠트"}, {"cat": "부사", "de": "hier", "ko": "여기", "pron": "히어"}, {"cat": "부사", "de": "dort", "ko": "저기", "pron": "도르트"}, {"cat": "부사", "de": "immer", "ko": "항상", "pron": "이머"}, {"cat": "부사", "de": "nie", "ko": "결코 ~않다", "pron": "니"}, {"cat": "부사", "de": "oft", "ko": "자주", "pron": "오프트"}, {"cat": "부사", "de": "manchmal", "ko": "가끔", "pron": "만히말"}, {"cat": "부사", "de": "schon", "ko": "이미", "pron": "숀"}, {"cat": "부사", "de": "noch", "ko": "아직, 더", "pron": "노흐"}, {"cat": "부사", "de": "sehr", "ko": "매우", "pron": "제어"}, {"cat": "부사", "de": "auch", "ko": "또한", "pron": "아우흐"}, {"cat": "부사", "de": "gern", "ko": "기꺼이, 즐겨", "pron": "게른"}, {"cat": "전치사·접속사", "de": "in", "ko": "~안에, ~에서", "pron": "인"}, {"cat": "전치사·접속사", "de": "auf", "ko": "~위에", "pron": "아우프"}, {"cat": "전치사·접속사", "de": "unter", "ko": "~아래에", "pron": "운터"}, {"cat": "전치사·접속사", "de": "mit", "ko": "~와 함께", "pron": "미트"}, {"cat": "전치사·접속사", "de": "ohne", "ko": "~없이", "pron": "오네"}, {"cat": "전치사·접속사", "de": "für", "ko": "~을 위해", "pron": "퓌어"}, {"cat": "전치사·접속사", "de": "von", "ko": "~로부터, ~의", "pron": "폰"}, {"cat": "전치사·접속사", "de": "zu", "ko": "~에게, ~로", "pron": "추"}, {"cat": "전치사·접속사", "de": "nach", "ko": "~로, ~후에", "pron": "나흐"}, {"cat": "전치사·접속사", "de": "aus", "ko": "~로부터, ~출신의", "pron": "아우스"}, {"cat": "전치사·접속사", "de": "und", "ko": "그리고", "pron": "운트"}, {"cat": "전치사·접속사", "de": "oder", "ko": "또는", "pron": "오더"}, {"cat": "전치사·접속사", "de": "aber", "ko": "그러나", "pron": "아버"}, {"cat": "전치사·접속사", "de": "weil", "ko": "왜냐하면", "pron": "바일"}, {"cat": "전치사·접속사", "de": "dass", "ko": "~라는 것", "pron": "다스"}, {"cat": "기타", "de": "ich", "ko": "나", "pron": "이히"}, {"cat": "기타", "de": "du", "ko": "너", "pron": "두"}, {"cat": "기타", "de": "er", "ko": "그", "pron": "에어"}, {"cat": "기타", "de": "sie", "ko": "그녀, 그들", "pron": "지"}, {"cat": "기타", "de": "es", "ko": "그것", "pron": "에스"}, {"cat": "기타", "de": "wir", "ko": "우리", "pron": "비어"}, {"cat": "기타", "de": "ihr", "ko": "너희", "pron": "이어"}, {"cat": "기타", "de": "Sie", "ko": "당신(존댓말)", "pron": "지"}, {"cat": "기타", "de": "was", "ko": "무엇", "pron": "바스"}, {"cat": "기타", "de": "wer", "ko": "누구", "pron": "베어"}, {"cat": "기타", "de": "wo", "ko": "어디", "pron": "보"}, {"cat": "기타", "de": "wann", "ko": "언제", "pron": "반"}, {"cat": "기타", "de": "warum", "ko": "왜", "pron": "바룸"}, {"cat": "기타", "de": "wie", "ko": "어떻게, 어떠한", "pron": "비"}, {"cat": "기타", "de": "ja", "ko": "네", "pron": "야"}, {"cat": "기타", "de": "nein", "ko": "아니요", "pron": "나인"}, {"cat": "기타", "de": "nicht", "ko": "~않다", "pron": "니히트"}, {"cat": "기타", "de": "kein", "ko": "어떤 ~도 없는", "pron": "카인"}, {"cat": "기타", "de": "bitte", "ko": "부탁합니다, 천만에요", "pron": "비테"}, {"cat": "기타", "de": "danke", "ko": "감사합니다", "pron": "당케"}];
+const KEY = "deutschLernen135_v1";
+const $ = id => document.getElementById(id);
+const today = () => new Date().toLocaleDateString("en-CA");
+let state = loadState();
+let cardOrder = WORDS.map((_,i)=>i), cardPos = 0, flipped = false;
+let quiz = null;
+function fresh(){return {known:[],mistakes:[],goal:20,days:{},lastDate:"",streak:0,quizStats:{played:0,correct:0,total:0}}}
+function loadState(){try{return {...fresh(),...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(e){return fresh()}}
+function saveState(){localStorage.setItem(KEY,JSON.stringify(state)); renderStats(); renderMistakes(); renderVocab();}
+function daily(){const d=today();if(!state.days[d])state.days[d]={seen:[],correct:0,total:0};return state.days[d]}
+function markSeen(i){let d=daily();if(!d.seen.includes(i))d.seen.push(i);saveState()}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderStats(){
+ $("learnedStat").textContent=state.known.length;
+ $("wrongStat").textContent=state.mistakes.length;
+ const d=daily();$("streakStat").textContent=d.seen.length;
+ $("goalInput").value=state.goal;$("goalLabel").textContent=`${d.seen.length} / ${state.goal}개`;
+ $("goalBar").style.width=Math.min(100,d.seen.length/state.goal*100)+"%";
+}
+function filteredCards(){let cat=$("catFilter").value;return cardOrder.map(i=>({...WORDS[i],i})).filter(w=>cat==="전체"||w.cat===cat)}
+function current(){let pool=filteredCards();if(!pool.length)return null;return pool[((cardPos%pool.length)+pool.length)%pool.length]}
+function renderCard(){
+ let w=current();if(!w)return;
+ const reverse=$("direction").value==="ko";
+ $("cardCat").textContent=w.cat;$("cardFront").textContent=reverse?w.ko:w.de;
+ $("cardBack").textContent=reverse?w.de:w.ko;$("cardPron").textContent="발음: "+w.pron;
+ $("cardBack").hidden=!flipped;$("cardPron").hidden=!flipped;$("tapHint").hidden=flipped;
+ $("cardCount").textContent=`${((cardPos%filteredCards().length)+filteredCards().length)%filteredCards().length+1} / ${filteredCards().length}`;
+ $("flipCard").textContent=flipped?"앞면 보기":"정답 보기";
+}
+function flip(){flipped=!flipped;let w=current();if(w)markSeen(w.i);renderCard()}
+function move(n){let pool=filteredCards();cardPos=(cardPos+n+pool.length)%pool.length;flipped=false;renderCard()}
+function addMistake(i){if(!state.mistakes.includes(i))state.mistakes.push(i);state.known=state.known.filter(x=>x!==i);saveState()}
+function markKnown(){let w=current();if(!w)return;if(!state.known.includes(w.i))state.known.push(w.i);state.mistakes=state.mistakes.filter(x=>x!==w.i);markSeen(w.i);move(1)}
+function renderMistakes(){
+ let el=$("mistakeList");if(!state.mistakes.length){el.innerHTML='<div class="empty">아직 오답이 없어! 시험이나 카드에서 틀린 단어를 추가해 봐.</div>';return}
+ el.innerHTML=state.mistakes.map(i=>{let w=WORDS[i];return `<div class="item"><div><strong>${escapeHTML(w.de)}</strong><small>${escapeHTML(w.ko)} · ${escapeHTML(w.pron)}</small></div><button class="primary small" data-know="${i}">다시 외움 ✓</button></div>`}).join("");
+ el.querySelectorAll("[data-know]").forEach(b=>b.onclick=()=>{let i=+b.dataset.know;state.mistakes=state.mistakes.filter(x=>x!==i);if(!state.known.includes(i))state.known.push(i);saveState()});
+}
+function renderVocab(){
+ const q=$("searchWord").value.toLowerCase().trim(),cat=$("vocabCat").value;
+ let list=WORDS.map((w,i)=>({...w,i})).filter(w=>(cat==="전체"||w.cat===cat)&&(!q||(w.de+" "+w.ko+" "+w.pron).toLowerCase().includes(q)));
+ $("vocabCount").textContent=`${list.length}개`;
+ $("vocabList").innerHTML=list.map(w=>`<div class="item"><div><strong>${escapeHTML(w.de)}</strong><small>${escapeHTML(w.ko)} · ${escapeHTML(w.cat)} · ${escapeHTML(w.pron)}</small></div><span>${state.known.includes(w.i)?"✓":state.mistakes.includes(w.i)?"×":""}</span></div>`).join("")||'<div class="empty">검색 결과가 없어.</div>';
+}
+function startQuiz(){
+ let type=$("quizType").value,size=+$("quizSize").value;
+ let pool=WORDS.map((w,i)=>({...w,i}));
+ if(type==="article")pool=pool.filter(w=>w.cat==="명사");
+ for(let i=pool.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+ pool=pool.slice(0,Math.min(size,pool.length));
+ quiz={type,items:pool,at:0,correct:0,answers:[],finished:false};
+ renderQuestion();
+}
+function renderQuestion(){
+ const area=$("quizArea");
+ if(!quiz){return}
+ if(quiz.at>=quiz.items.length){quiz.finished=true;area.innerHTML=`<h2>시험 끝!</h2><div class="quizquestion">${quiz.correct} / ${quiz.items.length}점</div><p>정답률 ${Math.round(quiz.correct/quiz.items.length*100)}%</p><button class="primary" id="again">다시 시험 보기</button>`;$("again").onclick=startQuiz;$("quizProgress").textContent="완료";return}
+ const w=quiz.items[quiz.at], type=quiz.type==="mix"?(Math.random()<.5?"deko":"kode"):quiz.type;
+ let prompt,correct,opts=[];
+ if(type==="article"){
+   if(!["명사"].includes(w.cat)){renderQuestionSkip();return}
+   prompt=w.de.replace(/^(der|die|das)\s+/,"");correct=w.de.split(" ")[0];
+   opts=["der","die","das"];
+ }else if(type==="deko"){
+   prompt=w.de;correct=w.ko;opts=[correct];
+   while(opts.length<4){let x=WORDS[Math.floor(Math.random()*WORDS.length)].ko;if(!opts.includes(x))opts.push(x)}
+ }else{
+   prompt=w.ko;correct=w.de;opts=[correct];
+   while(opts.length<4){let x=WORDS[Math.floor(Math.random()*WORDS.length)].de;if(!opts.includes(x))opts.push(x)}
+ }
+ for(let i=opts.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}
+ quiz.current={w,type,correct};
+ area.innerHTML=`<div class="between"><span class="pill">${type==="article"?"관사 맞히기":type==="deko"?"독일어 → 한국어":"한국어 → 독일어"}</span><span class="muted">${quiz.at+1} / ${quiz.items.length}</span></div><div class="quizquestion">${escapeHTML(prompt)}</div><div id="answers">${opts.map(o=>`<button class="answer" data-answer="${escapeHTML(o)}">${escapeHTML(o)}</button>`).join("")}</div><div id="feedback" class="feedback"></div><button id="nextQuestion" class="dark" style="width:100%;margin-top:14px" disabled>다음 문제 →</button>`;
+ area.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>answerQuiz(b.dataset.answer));
+ $("nextQuestion").onclick=()=>{quiz.at++;renderQuestion()};
+}
+function renderQuestionSkip(){quiz.at++;if(quiz.at<quiz.items.length)renderQuestion();else renderQuestion()}
+function answerQuiz(ans){
+ const {w,type,correct}=quiz.current;
+ const ok=ans===correct;
+ if(ok){quiz.correct++;if(!state.known.includes(w.i))state.known.push(w.i);state.mistakes=state.mistakes.filter(i=>i!==w.i)}
+ else addMistake(w.i);
+ markSeen(w.i);
+ const d=daily();d.total=(d.total||0)+1;if(ok)d.correct=(d.correct||0)+1;
+ quiz.answers.push({i:w.i,ok,ans});
+ document.querySelectorAll("[data-answer]").forEach(b=>{b.disabled=true;if(b.dataset.answer===correct)b.classList.add("correct");else if(b.dataset.answer===ans)b.classList.add("wrong")});
+ $("feedback").textContent=ok?"정답! Gut gemacht!":"정답: "+correct;
+ $("nextQuestion").disabled=false;state.quizStats.played++;state.quizStats.total++;if(ok)state.quizStats.correct++;
+ saveState();
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===b.dataset.view));if(b.dataset.view==="mistakes")renderMistakes();if(b.dataset.view==="vocab")renderVocab()});
+$("flashcard").onclick=flip;$("flashcard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+$("flipCard").onclick=flip;$("nextCard").onclick=()=>move(1);$("prevCard").onclick=()=>move(-1);
+$("markKnown").onclick=markKnown;$("markWrong").onclick=()=>{let w=current();if(w){addMistake(w.i);markSeen(w.i);move(1)}};
+$("shuffleCards").onclick=()=>{for(let i=cardOrder.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[cardOrder[i],cardOrder[j]]=[cardOrder[j],cardOrder[i]]}cardPos=0;flipped=false;renderCard()};
+$("catFilter").onchange=()=>{cardPos=0;flipped=false;renderCard()};$("direction").onchange=()=>{flipped=false;renderCard()};
+$("startQuiz").onclick=startQuiz;
+$("clearMistakes").onclick=()=>{if(confirm("오답 노트를 비울까?")){state.mistakes=[];saveState()}};
+$("saveGoal").onclick=()=>{state.goal=Math.max(1,Math.min(135,+$("goalInput").value||20));saveState();$("goalMessage").textContent="저장했어!";setTimeout(()=>$("goalMessage").textContent="",1800)};
+$("searchWord").oninput=renderVocab;$("vocabCat").onchange=renderVocab;
+$("exportData").onclick=()=>{let blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),state,words:WORDS},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="deutsch-lernen-backup.json";a.click();URL.revokeObjectURL(a.href)};
+$("resetAll").onclick=()=>{if(confirm("저장된 진도와 오답을 모두 초기화할까?")){state=fresh();saveState();renderCard()}};
+renderStats();renderCard();renderMistakes();renderVocab();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body>
+</html>
