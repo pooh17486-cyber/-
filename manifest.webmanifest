@@ -1,0 +1,17 @@
+{
+  "name": "Deutsch Lernen - 독일어 단어장",
+  "short_name": "독일어 단어장",
+  "description": "매일 연습하는 독일어 단어 135개",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#171717",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
